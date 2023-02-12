@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.cleanarchitecture.presentation.main.MainActivity
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.presentation.auth.AuthActivity
 import com.example.cleanarchitecture.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class SplashActivity : BaseActivity() {
+@AndroidEntryPoint
+class SplashActivity : AppCompatActivity() {
     private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +28,12 @@ class SplashActivity : BaseActivity() {
             override fun onFinish() {
                 if (viewModel.isUserNotNull()) {
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    finish()
                 } else {
                     startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
+                    finish()
                 }
+
             }
         }.start()
     }

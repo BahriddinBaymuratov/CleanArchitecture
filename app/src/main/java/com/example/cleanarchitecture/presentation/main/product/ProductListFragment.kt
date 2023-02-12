@@ -15,12 +15,13 @@ import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentProductListBinding
 import com.example.cleanarchitecture.presentation.base.BaseFragment
 import com.example.cleanarchitecture.presentation.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
     private var _binding: FragmentProductListBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel by viewModels<ProductListViewModel>()
     private val productListAdapter by lazy { ProductListAdapter() }
 
@@ -28,9 +29,9 @@ class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentProductListBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,13 +40,13 @@ class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
     }
 
     private fun initViews() {
-        binding.btnLogOut.click {
+        binding?.btnLogOut?.click {
             showDialog()
         }
-        binding.fab.click {
+        binding?.fab?.click {
             findNavController().navigate(R.id.action_productListFragment_to_addUpdateFragment)
         }
-        binding.rv.apply {
+        binding?.rv?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = productListAdapter
         }
@@ -55,11 +56,10 @@ class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
         }
         productListAdapter.onEditClick = {
             val product = bundleOf("product" to it)
-            findNavController().navigate(R.id.action_productListFragment_to_addUpdateFragment)
+            findNavController().navigate(R.id.action_productListFragment_to_addUpdateFragment, product)
         }
         observeViewModel()
     }
-
 
     private fun observeViewModel() {
         lifecycleScope.launch {
@@ -67,14 +67,14 @@ class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
                 when (it) {
                     is ProductListState.Idle -> Unit
                     is ProductListState.Loading -> {
-                        binding.prg.isVisible = true
+                        binding?.prg?.isVisible = true
                     }
                     is ProductListState.Error -> {
-                        binding.prg.isVisible = false
+                        binding?.prg?.isVisible = false
                         snackBar(it.text)
                     }
                     is ProductListState.Success -> {
-                        binding.prg.isVisible = false
+                        binding?.prg?.isVisible = false
                         productListAdapter.submitList(it.productList)
                     }
                 }
@@ -87,6 +87,8 @@ class ProductListFragment : BaseFragment(R.layout.fragment_product_list) {
             setTitle("Log Out")
             setMessage("Do you want to log out?")
             setPositiveButton("Yes") { di, _ ->
+                viewModel.logOut()
+                binding?.prg?.isVisible = true
                 di.dismiss()
                 (activity as MainActivity).finish()
             }

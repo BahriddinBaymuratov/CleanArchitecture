@@ -19,9 +19,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
+            android:textStyle="italic"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            app:fontFamily="@font/bevan" />
+            android:textSize="30sp" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="150dp"
@@ -57,8 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            app:boxStrokeColor="@color/blue"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="@color/blue">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
@@ -106,8 +107,7 @@
                 android:layout_weight="1"
                 android:text="@string/have"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:ignore="NestedWeights" />
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textView"

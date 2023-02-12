@@ -11,9 +11,10 @@ import com.example.cleanarchitecture.databinding.FragmentDetailBinding
 import com.example.cleanarchitecture.domain.model.Product
 import com.example.cleanarchitecture.presentation.base.BaseFragment
 import com.example.cleanarchitecture.util.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     private val binding by viewBinding { FragmentDetailBinding.bind(it) }
     private val viewModel: DetailViewModel by viewModels()

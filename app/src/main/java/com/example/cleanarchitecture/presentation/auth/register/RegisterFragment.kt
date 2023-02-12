@@ -14,10 +14,11 @@ import com.example.cleanarchitecture.databinding.FragmentRegisterBinding
 import com.example.cleanarchitecture.domain.model.User
 import com.example.cleanarchitecture.presentation.base.BaseFragment
 import com.example.cleanarchitecture.util.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
-
-class RegisterFragment : BaseFragment(R.id.registerFragment) {
+@AndroidEntryPoint
+class RegisterFragment : BaseFragment(R.layout.fragment_register) {
     private val viewModel: RegisterViewModel by viewModels()
     private val binding by viewBinding { FragmentRegisterBinding.bind(it) }
 

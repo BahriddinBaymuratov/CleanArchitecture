@@ -1,11 +1,8 @@
 package com.example.cleanarchitecture.presentation.main.add_update
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,12 +10,12 @@ import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentAddUpdateBinding
 import com.example.cleanarchitecture.domain.model.Product
 import com.example.cleanarchitecture.presentation.base.BaseFragment
-import com.example.cleanarchitecture.util.viewBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class AddUpdateFragment : BaseFragment(R.layout.fragment_add_update) {
     private var _binding: FragmentAddUpdateBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +30,7 @@ class AddUpdateFragment : BaseFragment(R.layout.fragment_add_update) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _binding = FragmentAddUpdateBinding.bind(view)
         binding.toolBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }

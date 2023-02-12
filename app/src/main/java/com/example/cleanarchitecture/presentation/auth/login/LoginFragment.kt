@@ -1,12 +1,8 @@
 package com.example.cleanarchitecture.presentation.auth.login
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,8 +11,9 @@ import com.example.cleanarchitecture.databinding.FragmentLoginBinding
 import com.example.cleanarchitecture.domain.model.User
 import com.example.cleanarchitecture.presentation.base.BaseFragment
 import com.example.cleanarchitecture.util.viewBinding
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private val binding by viewBinding { FragmentLoginBinding.bind(it) }
     private val viewModel: LoginViewModel by viewModels()
